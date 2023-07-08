@@ -45,6 +45,10 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProductById(long productId) {
+        Optional < Product > productDb = this.productRepository.findById(productId);
+
+        if (productDb.isEmpty()) throw new ResourceNotFoundException("Record not found with id : " + productId);
+
         productRepository.deleteById(productId);
     }
 }
